@@ -54,12 +54,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchImage1AndSet() {
-//        progress = new ProgressDialog(MainActivity.this);
-//        progress.setMessage("Please Wait...");
-//        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//        progress.setIndeterminate(true);
-//        progress.show();
-
         serviceWorker1.addTask(new Task<Bitmap>() {
             @Override
             public Bitmap onExecuteTask() {
@@ -76,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     bitmap = BitmapFactory.decodeStream(response.body().byteStream());
                     bitmapImg1 = bitmap;
-                    ServiceWorker.isDataReceived = true;
+                    ServiceWorker.dataReceivedTask1Count ++;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -98,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         serviceWorker2.addTask(new Task<Bitmap>() {
             @Override
             public Bitmap onExecuteTask() {
-                //Fetching image1 through okhttp
+                //Fetching image2 through okhttp
                 Bitmap bitmap = null;
                 Request request = new Request.Builder().url(IMAGE_2).build();
                 Response response = null;
@@ -111,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     bitmap = BitmapFactory.decodeStream(response.body().byteStream());
                     bitmapImg2 = bitmap;
-                    ServiceWorker.isDataReceived = true;
+                    ServiceWorker.dataReceivedTask2Count ++;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

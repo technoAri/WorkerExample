@@ -13,7 +13,8 @@ public class ServiceWorker{
 
     String task;
     Bitmap bitmap;
-    static Boolean isDataReceived = false;
+    static int dataReceivedTask1Count = 0;
+    static int dataReceivedTask2Count = 0;
     public ServiceWorker(String task) {
         this.task = task;
     }
@@ -30,11 +31,12 @@ public class ServiceWorker{
             }
         });
         thread.start();
-        try {
-            TimeUnit.MILLISECONDS.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if(dataReceivedTask1Count <= 1 && dataReceivedTask1Count <= 1)
+            try {
+                TimeUnit.MILLISECONDS.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         task.onTaskComplete(bitmap);
         return task;
     }
