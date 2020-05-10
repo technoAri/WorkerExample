@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -22,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     OkHttpClient okHttpClient = new OkHttpClient();
     ImageView imageView1, imageView2;
     Bitmap bitmapImg1, bitmapImg2;
-    ProgressDialog progress;
-    private boolean isDataReceived1= false;
 
     public static final String IMAGE_1= "https://i.pinimg.com/originals/ef/be/75/efbe755d1f03e5011e926709651f13f2.jpg";
     public static final String IMAGE_2= "https://lh4.googleusercontent.com/proxy/ihUFMyxUTA1drq81PQWMZqvA73rdJNY4h8xEidhMZk__o7a3qxUNMo78JFGfkfNI5P0kGhebexwE6zNlzXCcMW1WZ5MPpEcl1cnoL-Nt1usajYcsVQd_tcXFhg";
@@ -81,9 +80,14 @@ public class MainActivity extends AppCompatActivity {
             public void onTaskComplete(Bitmap result) {
                 //Set bitmap to image 1
                 result = bitmapImg1;
-                imageView1.setVisibility(View.VISIBLE);
-                imageView1.setImageBitmap(result);
-                imageView2.setVisibility(View.INVISIBLE);
+                if(result != null) {
+                    imageView1.setVisibility(View.VISIBLE);
+                    imageView1.setImageBitmap(result);
+                    imageView2.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Check your internet connecttion and try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -116,9 +120,14 @@ public class MainActivity extends AppCompatActivity {
             public void onTaskComplete(Bitmap result) {
                 //Set bitmap to image 2
                 result = bitmapImg2;
-                imageView2.setVisibility(View.VISIBLE);
-                imageView2.setImageBitmap(result);
-                imageView1.setVisibility(View.INVISIBLE);
+                if(result != null) {
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView2.setImageBitmap(result);
+                    imageView1.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Check your internet connecttion and try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
