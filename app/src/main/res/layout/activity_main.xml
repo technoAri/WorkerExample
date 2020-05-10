@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/iv_1"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center">
     </ImageView>
 
     <ImageView
         android:id="@+id/iv_2"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center">
     </ImageView>
@@ -26,7 +26,8 @@
         android:layout_height="50dp"
         android:text="Button 1"
         android:background="@color/colorPrimary"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:textColor="@color/colorAccent">
     </Button>
     <Button
         android:id="@+id/button_2"
@@ -34,6 +35,7 @@
         android:layout_height="50dp"
         android:text="Button 2"
         android:background="@color/colorPrimary"
-        android:layout_margin="15dp">
+        android:layout_margin="15dp"
+        android:textColor="@color/colorAccent">
     </Button>
 </LinearLayout>

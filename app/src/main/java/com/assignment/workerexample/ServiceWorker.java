@@ -1,7 +1,8 @@
 package com.assignment.workerexample;
 
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
+
+import java.util.concurrent.TimeUnit;
 
 interface Task<T> {
     T onExecuteTask();
@@ -11,46 +12,31 @@ interface Task<T> {
 public class ServiceWorker{
 
     String task;
+    Bitmap bitmap;
+    static Boolean isDataReceived = false;
     public ServiceWorker(String task) {
         this.task = task;
     }
 
-    public Task addTask(Task<Bitmap> task) {
+    public Task addTask(final Task<Bitmap> task) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try  {
+                    task.onExecuteTask();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            TimeUnit.MILLISECONDS.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        task.onTaskComplete(bitmap);
         return task;
     }
-
-//    @Override
-//    public void run() {
-//        addTask(new Task<Bitmap>() {
-//            @Override
-//            public Bitmap onExecuteTask() {
-//                return null;
-//            }
-//
-//            @Override
-//            public void onTaskComplete(Bitmap result) {
-//
-//            }
-//        });
-//    }
-
-//    @Override
-//    public Object onExecuteTask() {
-//        return null;
-//    }
-//
-//    @Override
-//    public void onTaskComplete(Bitmap result) {
-//
-//    }
-//
-//    class Test extends AsyncTask<void, void, void> {
-//
-//
-//        @Override
-//        protected void doInBackground(void... voids) {
-//
-//        }
-//    }
 
 }
